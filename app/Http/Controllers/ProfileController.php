@@ -23,7 +23,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit');
+        return response()->noContent();
     }
 
     /**
@@ -44,6 +44,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return response()->noContent();
     }
 }
