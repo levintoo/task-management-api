@@ -2,11 +2,20 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', UserController::class);
+
+    Route::controller(ProfileController::class)
+        ->prefix('profile')
+        ->name('profile.')
+        ->group(function () {
+            Route::patch('/', 'update')->name('update');
+            Route::delete('/', 'destroy')->name('destroy');
+        });
 });
 
 Route::middleware(['auth:sanctum', 'role:admin'])
